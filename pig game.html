@@ -127,23 +127,35 @@
     const holdButton = document.querySelector('.hold');
     const resetButton = document.querySelector('.reset');
     const diceImage = document.querySelector('img');
-    let scores = [0, 0];
+    let scoresA = 0;
+    let scoresB = 0;
     let currentScore = 0;
     let activePlayer = 0;
     let gameActive = true;
 
     function displayScores() {
-        score1.textContent = scores[0];
-        score2.textContent = scores[1];
-        currentScore1.textContent = activePlayer === 0 ? currentScore : 0;
-        currentScore2.textContent = activePlayer === 1 ? currentScore : 0;
+        score1.textContent = scoresA;
+        score2.textContent = scoresB;
+        if(activePlayer === 0){
+            currentScore1.textContent = currentScore;
+            currentScore2.textContent= 0;
+        }
+        else{
+            currentScore1.textContent = 0;
+            currentScore2.textContent= currentScore;
+        }
     }
 
     function switchPlayer() {
         currentScore = 0;
         displayScores();
         document.querySelectorAll('.p1, .p2').forEach(el => el.style.fontWeight = 'normal');
-        activePlayer = activePlayer === 0 ? 1 : 0;
+        if(activePlayer === 0){
+            activePlayer=1;
+        }
+        else{
+            activePlayer=0;
+        }
         document.querySelector(activePlayer === 0 ? '.left' : '.right').style.background = 'rgba(255, 255, 255, 0.08)';
         document.querySelector(activePlayer === 0 ? '.right' : '.left').style.background = '#f982c3';
     }
